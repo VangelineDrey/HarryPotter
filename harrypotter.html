@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wizarding Archives | Hogwarts Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* 🎨 REVISED DESIGN SYSTEM */
+        :root {
+            --gryffindor: #740001;
+            --gryffindor-accent: #AE0001;
+            --slytherin: #1A472A;
+            --slytherin-accent: #2A623D;
+            --ravenclaw: #0E1A40; /* Warna spesial Epauw */
+            --ravenclaw-accent: #222F5B;
+            --hufflepuff: #ECB939;
+            --hufflepuff-accent: #F0C75E;
+            --bg-parchment: #FDFBF5; /* Lebih terang & bersih */
+            --magic-gold: #D4AF37;
+            --magic-silver: #C0C0C0;
+            --text-dark: #2C3E50;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
+            --shadow-magic: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* ✨ GENERAL RESET & STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-parchment);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel Decorative', cursive;
+            letter-spacing: 1px;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* 🪄 HERO SECTION (Attention) */
+        header {
+            height: 100vh;
+            background: radial-gradient(circle at center, #1a2a4a 0%, #0E1A40 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        /* Efek partikel halus (pseudo-element) */
+        header::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,%3Csvg width="52" height="26" viewBox="0 0 52 26" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill-rule="evenodd"%3E%3Cg fill="%23d4af37" fill-opacity="0.1"%3E%3Cpath d="M10 10c0-2.21-1.79-4-4-4-2.21 0-4 1.79-4 4 0 2.21 1.79 4 4 4 2.21 0 4-1.79 4-4zm2 0c0-3.313-2.687-6-6-6-3.313 0-6 2.687-6 6 0 3.313 2.687 6 6 6 3.313 0 6-2.687 6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z" /%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+            opacity: 0.4;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, #fff, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            max-width: 750px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* 🖼️ HERO IMAGE STYLES */
+        .hero-image-container {
+            margin-bottom: 30px;
+        }
+        .hero-icon {
+            width: 120px; /* Atur ukuran ikon */
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+        }
+
+        .btn-magic {
+            background: linear-gradient(45deg, var(--magic-gold), #F0C75E);
+            color: var(--ravenclaw);
+            padding: 18px 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-magic:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        /* 🏰 WELCOME SECTION (Interest) */
+        #welcome {
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        #welcome h2 {
+            color: var(--gryffindor);
+            font-size: 3rem;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+
+        #welcome h2::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 3px;
+            background: var(--magic-gold);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .welcome-text {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .welcome-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .book-card {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex; /* Bikin kontennya flex biar rapi */
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        /* 🖼️ BOOK CARD IMAGE STYLES */
+        .book-icon {
+            width: 80px; /* Ukuran ikon buku */
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .book-card h3 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--ravenclaw);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* 🛡️ HOUSES SECTION (Desire) */
+        #houses {
+            background: linear-gradient(135deg, #111 0%, #2a2a2a 100%);
+            padding: 120px 0;
+            color: white;
+            border-radius: 50px 50px 0 0;
+        }
+
+        .house-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 60px;
+        }
+
+        .house-card {
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            position: relative;
+            border: 1px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .house-card:hover {
+            transform: scale(1.03);
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        /* 🖼️ HOUSE CREST IMAGE STYLES */
+        .house-crest {
+            width: 100px; /* Ukuran lambang asrama */
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .house-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .house-card p {
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .gryffindor {
+            background: linear-gradient(135deg, var(--gryffindor) 0%, var(--gryffindor-accent) 100%);
+        }
+        .slytherin {
+            background: linear-gradient(135deg, var(--slytherin) 0%, var(--slytherin-accent) 100%);
+        }
+        .ravenclaw {
+            background: linear-gradient(135deg, var(--ravenclaw) 0%, var(--ravenclaw-accent) 100%);
+        }
+        .hufflepuff {
+            background: linear-gradient(135deg, var(--hufflepuff) 0%, var(--hufflepuff-accent) 100%);
+            color: #333;
+        }
+        .hufflepuff h3 { color: #111; }
+
+        /* 👥 CHARACTERS SECTION */
+        #characters {
+            padding: 120px 0;
+        }
+
+        .char-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 60px;
+        }
+
+        .char-pill {
+            background: white;
+            color: var(--text-dark);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            cursor: default;
+        }
+
+        .char-pill:hover {
+            background: var(--ravenclaw);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(14, 26, 64, 0.2);
+        }
+
+        /* 💡 FUN FACTS SECTION (Action) */
+        #funfacts {
+            padding: 100px 0;
+            background: radial-gradient(circle at center, #fdfcfb 0%, #e2d1c31a 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .fact-container {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+
+        .fact-box {
+            background: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            text-align: left;
+            box-shadow: var(--shadow-soft);
+            border-left: 5px solid var(--magic-gold);
+            transition: transform 0.3s ease;
+        }
+
+        .fact-box:hover {
+            transform: translateX(5px);
+        }
+
+        .fact-box strong { color: var(--gryffindor); }
+
+        .owl-post-box {
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            margin-top: 80px;
+            box-shadow: var(--shadow-soft);
+            border: 2px solid var(--magic-gold);
+            position: relative;
+        }
+
+        .owl-post-box::after {
+            content: '🦉';
+            font-size: 3rem;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-parchment);
+            padding: 0 15px;
+        }
+
+        /* 🦶 FOOTER */
+        footer {
+            padding: 50px;
+            background: #111;
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+
+        footer strong { color: var(--magic-gold); font-weight: 600; }
+
+        /* 📱 RESPONSIVE MODIFICATIONS */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .welcome-grid { grid-template-columns: 1fr; }
+            .book-card { padding: 30px; }
+            #welcome h2, #houses h2, #characters h2, #funfacts h2 { font-size: 2.2rem; }
+            .owl-post-box { padding: 40px 20px; }
+            .hero-icon { width: 80px; }
+            .house-crest { width: 80px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="hero-content container">
+            <div class="hero-image-container">
+                <img src="hogwarts.png" alt="Magic Wand Icon" class="hero-icon">
+            </div>
+            <h1>The Wizarding Archives</h1>
+            <p>Lepaskan jiwa Muggle-mu. Masuklah ke dunia di mana sapu bisa terbang, potret bisa bicara, dan keajaiban nyata di setiap sudutnya.</p>
+            <a href="#welcome" class="btn-magic">Mulai Petualangan ✨</a>
+        </div>
+    </header>
+
+    <section id="welcome">
+        <div class="container">
+            <h2>Hogwarts Digital</h2>
+            <p class="welcome-text">Sekolah Sihir terbaik di dunia kini membuka gerbangnya untukmu. Jelajahi ribuan tahun sejarah, pengetahuan mantra, dan rahasia yang tersimpan rapat di kastil.</p>
+            
+            <div class="welcome-grid">
+                <div class="book-card">
+                    <img src="saga.png" alt="Saga Legendaris Book" class="book-icon">
+                    <h3>7 Saga Legendaris</h3>
+                    <p>Ikuti perjalanan Harry dari 'Batu Bertuah' hingga pertempuran akhir di 'Relikui Kematian'.</p>
+                </div>
+                <div class="book-card">
+                    <img src="kurikulum.png" alt="Potions Cauldron" class="book-icon">
+                    <h3>Kurikulum Sihir</h3>
+                    <p>Pelajari Ramuan rumit, Ramalan masa depan, hingga Pertahanan Terhadap Ilmu Hitam.</p>
+                </div>
+                <div class="book-card">
+                    <img src="perpus.png" alt="Forbidden Spells Book" class="book-icon">
+                    <h3>Perpustakaan Terlarang</h3>
+                    <p>Kumpulan mantra, kutukan, dan sejarah penyihir kegelapan yang paling ditakuti.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="houses">
+        <div class="container">
+            <h2 style="text-align: center; color: white; font-size: 2.8rem;">Temukan Jati Dirimu</h2>
+            <p style="text-align: center; opacity: 0.7; max-width: 600px; margin: 10px auto 0;">Di mana topi seleksi akan menempatkanmu? Setiap asrama memiliki nilai dan sejarahnya sendiri.</p>
+            
+            <div class="house-grid">
+                <div class="house-card gryffindor">
+                    <img src="gryf.png" alt="Gryffindor Crest" class="house-crest">
+                    <h3>Gryffindor</h3>
+                    <p>Keberanian & Keksatriaan</p>
+                </div>
+                <div class="house-card slytherin">
+                    <img src="sly.png" alt="Slytherin Crest" class="house-crest">
+                    <h3>Slytherin</h3>
+                    <p>Ambisi & Kecerdikan</p>
+                </div>
+                <div class="house-card ravenclaw">
+                    <img src="raven.png" alt="Ravenclaw Crest" class="house-crest">
+                    <h3>Ravenclaw</h3>
+                    <p>Kecerdasan & Kebijaksanaan</p>
+                </div>
+                <div class="house-card hufflepuff">
+                    <img src="huffle.png" alt="Hufflepuff Crest" class="house-crest">
+                    <h3>Hufflepuff</h3>
+                    <p>Kesetiaan & Kerja Keras</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="characters">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--ravenclaw);">Karakter Ikonik</h2>
+            <div class="char-list">
+                <span class="char-pill">Harry Potter</span>
+                <span class="char-pill">Hermione Granger</span>
+                <span class="char-pill">Ron Weasley</span>
+                <span class="char-pill">Albus Dumbledore</span>
+                <span class="char-pill">Severus Snape</span>
+                <span class="char-pill">Luna Lovegood</span>
+                <span class="char-pill">Draco Malfoy</span>
+                <span class="char-pill">Lord Voldemort</span>
+                <span class="char-pill">Sirius Black</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="funfacts">
+        <div class="container">
+            <h2>Tahukah Kamu?</h2>
+            
+            <div class="fact-container">
+                <div class="fact-box">
+                    <p><strong>Fakta #1:</strong> J.K. Rowling dan Harry Potter berbagi hari ulang tahun yang sama, yaitu 31 Juli.</p>
+                </div>
+                <div class="fact-box">
+                    <p><strong>Fakta #2:</strong> Dementor diciptakan sebagai representasi dari depresi yang pernah dialami penulisnya.</p>
+                </div>
+                <div class="fact-box">
+                    <p><strong>Fakta #3:</strong> Nama-nama tumbuhan di Herbologi diambil dari buku nyata peninggalan abad pertengahan.</p>
+                </div>
+            </div>
+
+            <div class="owl-post-box">
+                <h3 style="font-family: 'Poppins', sans-serif; font-weight: 600; margin-bottom: 10px; color: var(--ravenclaw);">Siap Menerima Surat dari Owl Post?</h3>
+                <p style="margin-bottom: 30px; opacity: 0.8;">Jangan ketinggalan berita terbaru dari Dunia Sihir. Daftar untuk berlangganan newsletter kami!</p>
+                <button class="btn-magic">DAFTAR SEKARANG</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Wizarding Archives Digital. Semua hak sihir dilindungi.</p>
+            <p style="margin-top: 10px;">Dibuat dengan tongkat sihir dan cinta untuk <strong>Potter Heads</strong> oleh <strong>Evangeline</strong> 🪄</p>
+        </div>
+    </footer>
+
+</body>
+</html>
